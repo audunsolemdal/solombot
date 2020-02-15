@@ -1,4 +1,4 @@
-name: Publish Docker
+name: solombot CI/CD pipeline
 on: [push]
 jobs:
   build:
