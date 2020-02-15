@@ -4,8 +4,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+
     - uses: actions/checkout@master
-    - name: Publish to Registry
+
+    - name: Build and publish to DockerHub
       uses: HurricanKai/Publish-Docker-Github-Action@master
       with:
         name: solomson/solombot
@@ -18,7 +20,7 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     - name: 'Update Azure webapp'
-    - uses: azure/webapps-container-deploy@v1
+      uses: azure/webapps-container-deploy@v1
       with:
         app-name: 'solombot'
         images: 'solomson/solombot:${{ github.sha }}'
