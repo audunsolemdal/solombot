@@ -11,3 +11,18 @@ jobs:
         name: solomson/solombot
         username: solomson
         password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: 'Update Azure webapp'
+    - uses: azure/webapps-container-deploy@v1
+      with:
+        app-name: 'solombot'
+        images: 'solomson/solombot:${{ github.sha }}'
+    
+    - name: Azure logout
+      run: |
+        az logout
