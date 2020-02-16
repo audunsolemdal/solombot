@@ -13,6 +13,7 @@ jobs:
         name: solomson/solombot
         username: solomson
         password: ${{ secrets.DOCKER_PASSWORD }}
+        tagging: true
         tags: "latest, ${{ github.sha }}"
 
     - name: 'Login via Azure CLI'
