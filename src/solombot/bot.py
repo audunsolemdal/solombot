@@ -31,7 +31,7 @@ async def _git(context):
 
 @client.command(aliases=['watch', 'w2g'])
 async def _w2g(context):
-    await context.send( 'g0mp2gether @ {url}')
+    await context.send(url)
 
 @client.command(aliases=['8ball', 'g0mpball'])
 async def _8ball(context):
