@@ -3,8 +3,6 @@ import random
 from discord.ext import commands
 import os
 
-os.environ['TOKEN'] = "placeholder"
-os.environ['URL'] = "placeholder"
 
 token = os.environ['TOKEN']
 url = os.environ['URL']
@@ -23,6 +21,10 @@ async def on_member_join(member):
 async def on_member_remove(member):
     print('Idioten,' '{member} has left Tosken')
 
+
+@client.command(aliases=['git', 'github', 'contribute'])
+async def _w2g(context):
+    await context.send( 'Contribute @ https://github.com/solomson/solombot')
 
 @client.command(aliases=['watch', 'w2g'])
 async def _w2g(context):
