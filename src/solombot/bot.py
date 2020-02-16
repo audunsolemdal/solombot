@@ -1,14 +1,12 @@
 import discord
 import random
 from discord.ext import commands
-from appsettings import SettingsParser
+import os
 
-parser  = SettingsParser()
+token = os.environ['TOKEN']
+url = os.environ['URL']
+
 client = commands.Bot(command_prefix = '.')
-
-parser.add_argument('--token', default='placeholderToken', env_var='TOKEN')
-parser.add_argument('--url', default='placeholderUrl', env_var='url')
-args = parser.parse_args()
 
 @client.event
 async def on_ready():
@@ -25,7 +23,7 @@ async def on_member_remove(member):
 
 @client.command(aliases=['watch', 'w2g'])
 async def _w2g(context):
-    await context.send( 'g0mp2gether @ {args.url}')
+    await context.send( 'g0mp2gether @ {url}')
 
 @client.command(aliases=['8ball', 'g0mpball'])
 async def _8ball(context):
@@ -35,4 +33,4 @@ async def _8ball(context):
     ]
     await context.send( random.choice(responses) )
 
-client.run(args.token)
+client.run(token)
