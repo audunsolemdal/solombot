@@ -20,11 +20,13 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: 'Update Azure webapp'
-      uses: azure/webapps-container-deploy@v1
+    - name: Azure CLI script
+      uses: azure/CLI@v1
       with:
-        app-name: 'solombot'
-        images: 'solomson/solombot:latest'
+        azcliversion: 2.0.76
+        inlineScript: |
+          az container restart --name solombot \
+          --resource-group solombot-rg --no-wait
     
     - name: Azure logout
       run: |

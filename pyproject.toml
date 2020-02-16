@@ -8,6 +8,7 @@ authors = ["Audun L Solemdal <audunlsolemdal@gmail.com>"]
 python = "^3.8"
 appsettings = "^0.8"
 "discord.py" = "^1.3.1"
+flask = "^1.1.1"
 
 [tool.poetry.dev-dependencies]
 

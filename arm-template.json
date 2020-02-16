@@ -1,76 +1,52 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "sites_solombot_name": {
+        "containerGroups_solombot_name": {
             "defaultValue": "solombot",
-            "type": "String"
-        },
-        "applan_name": {
-            "defaultValue": "ASP-solombotrg-8c6d",
             "type": "String"
         }
     },
     "variables": {},
     "resources": [
         {
-            "type": "Microsoft.Web/serverfarms",
-            "apiVersion": "2018-02-01",
-            "name": "[parameters('applan_name')]",
-            "location": "Norway East",
-            "sku": {
-                "name": "B1",
-                "tier": "Basic",
-                "size": "B1",
-                "family": "B",
-                "capacity": 1
-            },
-            "kind": "linux",
+            "type": "Microsoft.ContainerInstance/containerGroups",
+            "apiVersion": "2018-10-01",
+            "name": "[parameters('containerGroups_solombot_name')]",
+            "location": "northeurope",
             "properties": {
-                "perSiteScaling": false,
-                "maximumElasticWorkerCount": 1,
-            }
-        },
-        {
-            "type": "Microsoft.Web/sites",
-            "apiVersion": "2018-11-01",
-            "name": "[parameters('sites_solombot_name')]",
-            "location": "Norway East",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/serverfarms', parameters('applan_name'))]"
-            ],
-            "kind": "app,linux,container",
-            "properties": {
-                "enabled": true,
-                "hostNameSslStates": [
+                "containers": [
                     {
-                        "name": "[concat(parameters('sites_solombot_name'), '.azurewebsites.net')]",
-                        "sslState": "Disabled",
-                        "hostType": "Standard"
-                    },
-                    {
-                        "name": "[concat(parameters('sites_solombot_name'), '.scm.azurewebsites.net')]",
-                        "sslState": "Disabled",
-                        "hostType": "Repository"
+                        "name": "[parameters('containerGroups_solombot_name')]",
+                        "properties": {
+                            "image": "[concat('solomson/', parameters('containerGroups_solombot_name'), ':v1')]",
+                            "ports": [
+                                {
+                                    "protocol": "TCP",
+                                    "port": 8080
+                                }
+                            ],
+                            "resources": {
+                                "requests": {
+                                    "memoryInGB": 0.5,
+                                    "cpu": 1
+                                }
+                            }
+                        }
                     }
                 ],
-                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('applan_name'))]",
-                "reserved": true,
-                "httpsOnly": true,
-                "redundancyMode": "None"
-            }
-        },
-        {
-            "type": "Microsoft.Web/sites/hostNameBindings",
-            "apiVersion": "2018-11-01",
-            "name": "[concat(parameters('sites_solombot_name'), '/', parameters('sites_solombot_name'), '.azurewebsites.net')]",
-            "location": "Norway East",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('sites_solombot_name'))]"
-            ],
-            "properties": {
-                "siteName": "solombot",
-                "hostNameType": "Verified"
+                "restartPolicy": "OnFailure",
+                "ipAddress": {
+                    "ports": [
+                        {
+                            "protocol": "TCP",
+                            "port": 8080
+                        }
+                    ],
+                    "type": "Public",
+                    "dnsNameLabel": "[parameters('containerGroups_solombot_name')]"
+                },
+                "osType": "Linux"
             }
         }
     ]
