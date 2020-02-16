@@ -10,4 +10,4 @@ COPY ./src .
 
 RUN poetry install --no-dev
 
-RUN poetry run python -m solombot.bot
+ENTRYPOINT ["poetry run python", "-m", "solombot"]

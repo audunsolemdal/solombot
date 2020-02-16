@@ -3,6 +3,9 @@ import random
 from discord.ext import commands
 import os
 
+os.environ['TOKEN'] = "placeholder"
+os.environ['URL'] = "placeholder"
+
 token = os.environ['TOKEN']
 url = os.environ['URL']
 
