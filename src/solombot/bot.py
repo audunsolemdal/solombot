@@ -7,6 +7,9 @@ import os
 token = os.environ['TOKEN']
 url = os.environ['URL']
 
+print(token)
+print(url)
+
 client = commands.Bot(command_prefix = '.')
 
 @client.event
@@ -23,7 +26,7 @@ async def on_member_remove(member):
 
 
 @client.command(aliases=['git', 'github', 'contribute'])
-async def _w2g(context):
+async def _git(context):
     await context.send( 'Contribute @ https://github.com/solomson/solombot')
 
 @client.command(aliases=['watch', 'w2g'])
