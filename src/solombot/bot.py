@@ -33,6 +33,10 @@ async def _git(context):
 async def _w2g(context):
     await context.send(url)
 
+@client.command(aliases=['bjarne'])
+async def _bjarne(context):
+    await context.send('BJARNE!!!')
+
 @client.command(aliases=['8ball', 'g0mpball'])
 async def _8ball(context):
     responses = [
