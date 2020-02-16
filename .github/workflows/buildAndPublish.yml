@@ -13,7 +13,6 @@ jobs:
         name: solomson/solombot
         username: solomson
         password: ${{ secrets.DOCKER_PASSWORD }}
-        tagging: true
         tags: "latest, ${{ github.sha }}"
 
     - name: 'Login via Azure CLI'
@@ -25,7 +24,7 @@ jobs:
       uses: azure/webapps-container-deploy@v1
       with:
         app-name: 'solombot'
-        images: 'solomson/solombot:${{ github.sha }}'
+        images: 'solomson/solombot:latest'
     
     - name: Azure logout
       run: |
