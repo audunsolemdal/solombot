@@ -1,0 +1,3 @@
+dist/*
+src/solombot/__pycache__
+src/solombot.egg-info
