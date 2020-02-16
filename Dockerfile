@@ -10,5 +10,5 @@ COPY ./src .
 
 RUN poetry install --no-dev
 
-EXPOSE 443
+EXPOSE 8080
 ENTRYPOINT ["poetry", "run", "python", "-m", "solombot"]
