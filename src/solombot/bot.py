@@ -24,7 +24,7 @@ async def on_member_join(member):
 async def on_member_remove(member):
     print('Idioten,' '{member} has left Tosken')
 
-@client.command(aliases=['commands', command])
+@client.command(aliases=['commands', 'command'])
 async def _help(context):
     helptext = "```"
     for command in client.commands:
