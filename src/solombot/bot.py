@@ -51,7 +51,8 @@ async def _bjarne(context):
 async def _8ball(context):
     responses = [
         'Jepp',
-        '100%'
+        '100%',
+        'light weight'
     ]
     await context.send( random.choice(responses) )
 
