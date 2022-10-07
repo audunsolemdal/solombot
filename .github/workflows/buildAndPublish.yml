@@ -8,16 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - uses: actions/checkout@master
-
-    - name: Build and publish to DockerHub
-      uses: HurricanKai/Publish-Docker-Github-Action@master
-      with:
-        name: solomson/solombot
-        username: solomson
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        tags: "latest, ${{ github.sha }}"
-
     - name: 'Login via Azure CLI'
       uses: azure/login@v1
       with:
